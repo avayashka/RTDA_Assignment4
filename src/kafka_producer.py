@@ -1,18 +1,3 @@
-"""
-kafka_producer.py - Part B (Kafka version): send research-job events to Kafka.
-
-  * creates topic `research-events` with 3 partitions (if it does not exist)
-  * key = research_group -> all events of one group land in the same partition
-    (ordering per group is preserved, load is spread over 3 partitions)
-  * value = JSON event
-  * acks="all" + retries -> no silent loss if the broker is slow
-
-Run from the project root (Kafka must be running, see README):
-    python src/kafka_producer.py                      # 10 supplied events
-    python src/kafka_producer.py --extended           # 10 supplied + generated events
-    python src/kafka_producer.py --rate 5             # 5 events per second
-    python src/kafka_producer.py --bad                # also send 2 invalid events (tests DLQ)
-"""
 import argparse
 import json
 import time
