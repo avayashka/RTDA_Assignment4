@@ -1,21 +1,3 @@
-"""
-spark_streaming_job.py - Part D: Spark Structured Streaming.
-
-Equivalent of the Python windowed processor:
-    5-second event-time tumbling window  x  job_type  ->  count, avg_duration
-
-Sources (choose with --source):
-  file  : the extended stream is split into small CSV files in data/stream_input/;
-          Spark reads ONE file per micro-batch (maxFilesPerTrigger=1), i.e. the
-          files behave like arriving micro-batches. No Kafka needed.
-  kafka : reads JSON events from topic `research-events` (run kafka_producer.py).
-
-Run from the project root:
-    python src/spark_streaming_job.py --source file
-    python src/spark_streaming_job.py --source kafka
-    python src/spark_streaming_job.py --source kafka --live 120   # keep running 120 s
-(or: spark-submit src/spark_streaming_job.py --source file)
-"""
 from __future__ import annotations
 
 import argparse
@@ -38,9 +20,9 @@ def build_spark(with_kafka: bool):
 
     builder = (SparkSession.builder
                .appName("AITU-A4-PartD-StructuredStreaming")
-               .master("local[3]")                              # 3 local cores = 3 parallel tasks
-               .config("spark.sql.shuffle.partitions", "3")     # small data -> few shuffle partitions
-               .config("spark.sql.session.timeZone", "UTC"))    # show 14:00:00 exactly as in the data
+               .master("local[3]")                              
+               .config("spark.sql.shuffle.partitions", "3")     
+               .config("spark.sql.session.timeZone", "UTC"))  
     if with_kafka:
         v = pyspark.__version__
         scala = "2.13" if v.startswith("4") else "2.12"
