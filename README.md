@@ -1,7 +1,6 @@
 # Assignment 4 — Distributed Stream Processing
 AITU Research Event Analytics with Kafka and Spark (synthetic data)
 
-Individual variant / seed: `STUDENT_SEED = 240791` (in `src/common.py` — put your own student ID there).
 
 ## 1. Project structure
 
@@ -24,11 +23,6 @@ assignment4_kafka_spark/
 ├── results/                   <- every table and chart produced (evidence for the report)
 └── docs/architecture.png      <- Part A diagram
 ```
-
-What the instructor asked:
-* **Part B** – statistics in Python, Kafka not required → notebook uses an in-memory queue as the "broker".
-* **Part C** – no Kafka, **not limited to the 10 events** → notebook generates a longer synthetic stream (108 events, 24 windows) from the profile of the 10 supplied events and windows it.
-* **Part D** – Spark Structured Streaming → notebook (file source) and `src/spark_streaming_job.py`.
 
 ## 2. Installation
 
@@ -85,24 +79,3 @@ bin/kafka-server-start.sh -daemon config/kraft/server.properties
 | 7 | `python src/spark_streaming_job.py --source file` | console micro-batches + `results/spark_partD_file.csv` |
 | 8 (optional) | `python src/spark_streaming_job.py --source kafka` | Spark reads the Kafka topic |
 | 9 (optional) | `python src/load_test.py --mode kafka` | Part E through the broker |
-
-Tips: delete old `results/consumer_*.json` before `--merge`; use a new `--group` name to re-read a topic from the beginning;
-`docker exec kafka /opt/kafka/bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group research-analytics` shows the lag (monitoring).
-
-## 4. Expected results (check that yours match)
-
-Part B (10 supplied events): completed 8, failed 2 · ml 2/1/52.33 · image 3/0/77.67 · text 2/0/20.00 · simulation 1/1/107.50 ·
-CPU G01 68.50, G02 62.00, G03 86.33.
-
-Part C first windows: 14:00:00–05 → 4 events, 25 %, 66.25 · 14:00:05–10 → 5 events, 20 %, 75.20 ·
-14:00:10–15 → E010 + generated events (with seed 240791: E010, E011 → 2 events, 0 %, 74.50).
-
-Part D: Spark result must equal `results/partD_expected_pandas.csv` (the notebook checks this automatically).
-
-## 5. Google Colab alternative
-Upload the folder (or zip) to Colab, then:
-```python
-!pip install -q kafka-python pyspark==3.5.3
-%cd /content/assignment4_kafka_spark
-```
-and run the notebook cells. Java is already installed in Colab. Kafka can be started with the "Without Docker" commands above (prefix with `!`).
