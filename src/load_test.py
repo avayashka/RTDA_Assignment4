@@ -1,23 +1,3 @@
-"""
-load_test.py - Part E: throughput / latency under synthetic load.
-
-Two modes:
-  inproc : producer thread -> queue.Queue (stands in for the broker) -> consumer thread.
-           No Kafka needed. Used in the notebook.
-  kafka  : producer -> Kafka topic `research-events-load` -> consumer (kafka-python).
-           Needs the broker from docker-compose.yml.
-
-The consumer does the real per-event work of the pipeline:
-JSON decode -> schema validation -> 5-second tumbling-window update.
-
-Latency  = time the consumer finished processing an event - time the producer created it.
-Throughput = events processed / (last processed time - first send time).
-CPU %    = CPU used by this Python process during the level (psutil; 100 % = one full core).
-
-Run from the project root:
-    python src/load_test.py --mode inproc
-    python src/load_test.py --mode kafka
-"""
 from __future__ import annotations
 
 import argparse
@@ -53,7 +33,7 @@ class WindowState:
     """Minimal 5-s tumbling-window aggregator used as the 'processing' step."""
 
     def __init__(self):
-        self.win = defaultdict(lambda: [0, 0, 0.0])  # count, failed, cpu_sum
+        self.win = defaultdict(lambda: [0, 0, 0.0])  
 
     def update(self, ev: dict) -> None:
         h, m, s = map(int, ev["timestamp"].split(":"))
@@ -106,9 +86,6 @@ def _summary(rate, sent, lat_ms, t_first_send, t_last_done, cpu_pct, mode, batch
     }
 
 
-# --------------------------------------------------------------------------
-# In-process pipeline (no Kafka)
-# --------------------------------------------------------------------------
 def run_inproc_level(rate: int, duration_s: float = 10, batch: bool = False,
                      maxsize: int = 100_000, seed: int = STUDENT_SEED) -> dict:
     rng = random.Random(seed)
@@ -120,7 +97,7 @@ def run_inproc_level(rate: int, duration_s: float = 10, batch: bool = False,
     def consumer():
         while True:
             items = [q.get()]
-            if batch:                      # optimisation: drain up to 500 at once
+            if batch:                    
                 try:
                     while len(items) < 500:
                         items.append(q.get_nowait())
@@ -185,10 +162,6 @@ def run_inproc_capacity(n_events: int = 200_000, batch: bool = False) -> dict:
             "max_throughput": round(done[0] / (done[1] - t0), 1),
             "cpu_pct": round(proc.cpu_percent(None), 1)}
 
-
-# --------------------------------------------------------------------------
-# Kafka pipeline (needs a running broker)
-# --------------------------------------------------------------------------
 def run_kafka_level(rate: int, duration_s: float = 10, topic: str = "research-events-load",
                     bootstrap: str = BOOTSTRAP) -> dict:
     from kafka import KafkaConsumer, KafkaProducer
