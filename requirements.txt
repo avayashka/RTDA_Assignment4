@@ -1,0 +1,6 @@
+jupyter
+pandas>=2.0,<3
+matplotlib
+psutil
+kafka-python>=2.0.3
+pyspark==3.5.3

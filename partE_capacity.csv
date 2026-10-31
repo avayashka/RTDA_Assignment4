@@ -1,0 +1,3 @@
+mode,batch_consumer,events,max_throughput,cpu_pct
+inproc-capacity,False,200000,103265.6,97.6
+inproc-capacity,True,200000,102823.2,97.6

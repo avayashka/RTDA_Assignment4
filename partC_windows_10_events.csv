@@ -1,0 +1,4 @@
+Window,Events,Count,Failed,Failure rate %,Average CPU,Emitted after
+14:00:00–14:00:05,"E001, E002, E003, E004",4,1,25.0,66.25,E010
+14:00:05–14:00:10,"E005, E006, E007, E008, E009",5,1,20.0,75.2,end-of-stream
+14:00:10–14:00:15,E010,1,0,0.0,78.0,end-of-stream

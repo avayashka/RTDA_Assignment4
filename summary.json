@@ -1,0 +1,163 @@
+{
+  "student_seed": 240791,
+  "python": "3.11.9",
+  "partB_completed": 8,
+  "partB_failed": 2,
+  "partB_job": [
+    {
+      "Job type": "ml",
+      "Completed": 2,
+      "Failed": 1,
+      "Average duration (s)": 52.33
+    },
+    {
+      "Job type": "image",
+      "Completed": 3,
+      "Failed": 0,
+      "Average duration (s)": 77.67
+    },
+    {
+      "Job type": "text",
+      "Completed": 2,
+      "Failed": 0,
+      "Average duration (s)": 20.0
+    },
+    {
+      "Job type": "simulation",
+      "Completed": 1,
+      "Failed": 1,
+      "Average duration (s)": 107.5
+    }
+  ],
+  "partB_cpu": [
+    {
+      "Research group": "G01",
+      "Events": 4,
+      "Average CPU %": 68.5
+    },
+    {
+      "Research group": "G02",
+      "Events": 3,
+      "Average CPU %": 62.0
+    },
+    {
+      "Research group": "G03",
+      "Events": 3,
+      "Average CPU %": 86.33
+    }
+  ],
+  "partC_events": 108,
+  "partC_windows": 24,
+  "partC_first3": [
+    {
+      "Window": "14:00:00\u201314:00:05",
+      "Events": "E001, E002, E003, E004",
+      "Count": 4,
+      "Failed": 1,
+      "Failure rate %": 25.0,
+      "Average CPU": 66.25,
+      "Emitted after": "E010"
+    },
+    {
+      "Window": "14:00:05\u201314:00:10",
+      "Events": "E005, E006, E007, E008, E009",
+      "Count": 5,
+      "Failed": 1,
+      "Failure rate %": 20.0,
+      "Average CPU": 75.2,
+      "Emitted after": "E012"
+    },
+    {
+      "Window": "14:00:10\u201314:00:15",
+      "Events": "E010, E011",
+      "Count": 2,
+      "Failed": 0,
+      "Failure rate %": 0.0,
+      "Average CPU": 74.5,
+      "Emitted after": "E016"
+    }
+  ],
+  "partE": [
+    {
+      "mode": "inproc",
+      "batch_consumer": false,
+      "input_rate": 10,
+      "sent": 100,
+      "processed": 100,
+      "observed_throughput": 10.1,
+      "avg_latency_ms": 0.488,
+      "p95_latency_ms": 0.639,
+      "max_latency_ms": 0.685,
+      "cpu_pct": 1.6,
+      "bottleneck": "none - limited by input rate; consumer mostly idle"
+    },
+    {
+      "mode": "inproc",
+      "batch_consumer": false,
+      "input_rate": 100,
+      "sent": 1000,
+      "processed": 1000,
+      "observed_throughput": 100.1,
+      "avg_latency_ms": 0.349,
+      "p95_latency_ms": 0.506,
+      "max_latency_ms": 0.865,
+      "cpu_pct": 2.2,
+      "bottleneck": "none - limited by input rate; consumer mostly idle"
+    },
+    {
+      "mode": "inproc",
+      "batch_consumer": false,
+      "input_rate": 500,
+      "sent": 5000,
+      "processed": 5000,
+      "observed_throughput": 500.1,
+      "avg_latency_ms": 0.302,
+      "p95_latency_ms": 0.479,
+      "max_latency_ms": 1.016,
+      "cpu_pct": 2.5,
+      "bottleneck": "none - limited by input rate; consumer mostly idle"
+    },
+    {
+      "mode": "inproc",
+      "batch_consumer": false,
+      "input_rate": 2000,
+      "sent": 10000,
+      "processed": 10000,
+      "observed_throughput": 1999.8,
+      "avg_latency_ms": 0.38,
+      "p95_latency_ms": 0.597,
+      "max_latency_ms": 1.291,
+      "cpu_pct": 4.4,
+      "bottleneck": "none - limited by input rate; consumer mostly idle"
+    },
+    {
+      "mode": "inproc",
+      "batch_consumer": false,
+      "input_rate": 5000,
+      "sent": 25000,
+      "processed": 25000,
+      "observed_throughput": 4998.1,
+      "avg_latency_ms": 0.378,
+      "p95_latency_ms": 0.602,
+      "max_latency_ms": 3.083,
+      "cpu_pct": 9.4,
+      "bottleneck": "none - limited by input rate; consumer mostly idle"
+    }
+  ],
+  "partE_capacity": [
+    {
+      "mode": "inproc-capacity",
+      "batch_consumer": false,
+      "events": 200000,
+      "max_throughput": 103265.6,
+      "cpu_pct": 97.6
+    },
+    {
+      "mode": "inproc-capacity",
+      "batch_consumer": true,
+      "events": 200000,
+      "max_throughput": 102823.2,
+      "cpu_pct": 97.6
+    }
+  ]
+}

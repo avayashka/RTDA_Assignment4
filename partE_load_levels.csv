@@ -1,0 +1,6 @@
+mode,batch_consumer,input_rate,sent,processed,observed_throughput,avg_latency_ms,p95_latency_ms,max_latency_ms,cpu_pct,bottleneck
+inproc,False,10,100,100,10.1,0.488,0.639,0.685,1.6,none - limited by input rate; consumer mostly idle
+inproc,False,100,1000,1000,100.1,0.349,0.506,0.865,2.2,none - limited by input rate; consumer mostly idle
+inproc,False,500,5000,5000,500.1,0.302,0.479,1.016,2.5,none - limited by input rate; consumer mostly idle
+inproc,False,2000,10000,10000,1999.8,0.38,0.597,1.291,4.4,none - limited by input rate; consumer mostly idle
+inproc,False,5000,25000,25000,4998.1,0.378,0.602,3.083,9.4,none - limited by input rate; consumer mostly idle
