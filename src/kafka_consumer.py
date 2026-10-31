@@ -1,19 +1,3 @@
-"""
-kafka_consumer.py - Part B (Kafka version): read events, validate schema, aggregate.
-
-  * consumer group `research-analytics` -> start 1..3 instances, Kafka splits the
-    3 partitions between them (parallel processing)
-  * every message is validated against the schema; invalid ones go to the
-    dead-letter topic `research-events-dlq`
-  * keeps PARTIAL aggregates (sums + counts) so that several consumer instances
-    can be merged later by the aggregation layer (`--merge`)
-  * stops after `--idle` seconds without new messages and prints the tables
-
-Run from the project root:
-    python src/kafka_consumer.py                    # one instance reads all 3 partitions
-    python src/kafka_consumer.py --name c1          # run c1, c2, c3 in 3 terminals
-    python src/kafka_consumer.py --merge            # combine results/consumer_*.json
-"""
 import argparse
 import glob
 import json
@@ -92,7 +76,7 @@ def main():
         bootstrap_servers=args.bootstrap,
         group_id=args.group,
         client_id=f"research-consumer-{args.name}",
-        auto_offset_reset="earliest",     # read the topic from the beginning on first run
+        auto_offset_reset="earliest",     
         enable_auto_commit=True,
         value_deserializer=lambda b: b.decode("utf-8"),
         consumer_timeout_ms=args.idle * 1000,
