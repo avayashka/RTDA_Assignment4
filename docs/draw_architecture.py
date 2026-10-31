@@ -23,41 +23,35 @@ def arrow(x1, y1, x2, y2, style="-", color="#333333", text=None, rad=0.0):
     if text:
         ax.text((x1 + x2) / 2, (y1 + y2) / 2 + 1.3, text, fontsize=8, ha="center", color=color)
 
-# Producers
 group(1, 20, 22, 46, "Producers", "#F7F7F7")
 for i, g in enumerate(["G01", "G02", "G03"]):
     box(3.5, 52 - i * 13, 17, 8, f"Producer {g}\nkey = {g}\nacks=all, retries")
 
-# Kafka
 group(30, 14, 34, 52, "Kafka broker (KRaft)\ntopic: research-events", "#FFF8E6")
 for i in range(3):
     box(36, 47 - i * 11, 22, 7, f"Partition {i}\noffsets 0..n", fc="#FFFFFF", ec="#F58518")
 box(36, 16.5, 22, 7, "research-events-dlq\n(invalid events)", fc="#FDECEC", ec="#E45756")
 
-# Consumer group
 group(71, 20, 30, 46, "Consumer group\nresearch-analytics", "#EEF7F1")
 for i in range(3):
     box(74, 48 - i * 12.5, 24, 8.5, f"Consumer c{i+1}\nPython processor:\nvalidate + 5-s windows", ec="#54A24B")
 
-# Spark
 box(69, 3, 34, 10, "Spark Structured Streaming\nwatermark 10 s, window(5 s) x job_type\n-> count, avg_duration", fc="#F3EEF9", ec="#B279A2")
 
-# Aggregation + monitoring
 box(106, 37, 21, 18, "Aggregation layer\n\nmerge partial sums\nby job_type, group,\nwindow -> results/*.csv", fc="#EEF3FA", ec="#4C78A8")
 box(130.5, 30, 18.5, 30, "Monitoring\n\nconsumer lag\nthroughput, latency\nfailure-rate alert\nCPU >= 85 % alert\nKafka UI :8080", fc="#FFFBEA", ec="#B8860B")
 
-# arrows producers -> topic
 for i in range(3):
     arrow(21, 56 - i * 13, 35.5, 50.5 - i * 11)
-# partitions -> consumers
+
 for i in range(3):
     arrow(58.5, 50.5 - i * 11, 73.5, 52.2 - i * 12.5)
-# consumers -> dlq
+
 arrow(74, 26.5, 58.5, 20, style="--", color="#E45756", text="invalid", rad=-0.1)
-# topic -> spark
+
 arrow(47, 13.5, 68.5, 8, color="#B279A2", rad=0.15)
 ax.text(44, 7, "readStream\n(kafka source)", fontsize=8, color="#B279A2", ha="center")
-# consumers -> agg
+
 for i in range(3):
     arrow(98.5, 52.2 - i * 12.5, 105.5, 46)
 arrow(103.5, 8, 116, 36.5, color="#B279A2", rad=0.2)
